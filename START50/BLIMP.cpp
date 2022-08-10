@@ -29,12 +29,28 @@ using ll = long long;
 #define fi first
 #define se second
 
-void solve(){
-}
-
 int main(){
-	ios::sync_with_stdio(false); cin.tie(0);
-	int T; cin >> T;
-	while(T--) solve();
-	return 0;
+	int T;
+	cin >> T;
+	while(T--){
+		int n,x,y;
+		cin >> n >> x >> y;
+		vector<int> a(n);
+		for(int i = 0; i < n; i++) cin >> a[i];
+
+		if(x <= y){
+			int mx = *max_element(a.begin(), a.end());
+			cout << (mx + y - 1) / y << endl;
+			continue;
+		}
+
+		int cnt = 0;
+		for(int i = n-1; i >= 0; i--){
+			int rest = a[i] - cnt * y;
+			if(rest <= 0) continue;
+			int needed = (rest + x - 1) / x;
+			cnt += needed;
+		}
+		cout << cnt << endl;
+	}
 }

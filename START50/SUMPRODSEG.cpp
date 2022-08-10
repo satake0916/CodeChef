@@ -29,12 +29,34 @@ using ll = long long;
 #define fi first
 #define se second
 
-void solve(){
+pair<ll, ll> sol(ll x){
+	ll l,r;
+	for(ll i = 1; i*i <= x; i++){
+		if(x % i == 0){
+			l = i;
+			r = x/i;
+		}
+	}
+	return make_pair(l, r);
+}
+
+void pp(pair<ll, ll> p){
+	cout << p.first << " " << p.second << endl;
 }
 
 int main(){
-	ios::sync_with_stdio(false); cin.tie(0);
-	int T; cin >> T;
-	while(T--) solve();
-	return 0;
+	int T;
+	cin >> T;
+	while(T--){
+		ll x,y;
+		cin >> x >> y;
+		pair<ll, ll> wa = make_pair(x/2, x - x/2);
+		pair<ll, ll> seki = sol(y);
+		if(wa.second < seki.first || seki.second < wa.first){
+			pp(wa);
+			pp(seki);
+		}else{
+			cout << -1 << endl;
+		}
+	}
 }
